@@ -39,6 +39,7 @@ country varchar(20)not null, #egypt
 visited_place varchar(200) not null, # saint catrine mountain
   foreign key (comp_id) references company (comp_id)
  );
+ 
   create table if not exists Trips_photos (
   trip_id  BIGINT not null ,
   photo longblob not null,
