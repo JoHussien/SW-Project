@@ -5,7 +5,7 @@ create database if not exists `travelling_agency`;
 use `travelling_agency`;
 
 create table if not exists company (
-comp_id BIGINT primary key not null, 
+comp_id BIGINT primary key not null auto_increment, 
 comp_name varchar(50) not null,
 representative_fame varchar(15) not null,
 representative_lname varchar(15) not null,
@@ -40,7 +40,7 @@ visited_place varchar(200) not null, # saint catrine mountain
   foreign key (comp_id) references company (comp_id)
  );
   create table if not exists Trips_photos (
-  trip_id  BIGINT not null,
+  trip_id  BIGINT not null ,
   photo longblob not null,
   photo_id BIGINT,
   constraint Trips_photos_Pk primary key (trip_id,photo_id),
