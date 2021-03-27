@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/travel_buddy/static/css/main.9d5b29c0.chunk.css",
-    "main.js": "/travel_buddy/static/js/main.1fb155ae.chunk.js",
-    "main.js.map": "/travel_buddy/static/js/main.1fb155ae.chunk.js.map",
-    "runtime-main.js": "/travel_buddy/static/js/runtime-main.174213e6.js",
-    "runtime-main.js.map": "/travel_buddy/static/js/runtime-main.174213e6.js.map",
-    "static/js/2.90beae1b.chunk.js": "/travel_buddy/static/js/2.90beae1b.chunk.js",
-    "static/js/2.90beae1b.chunk.js.map": "/travel_buddy/static/js/2.90beae1b.chunk.js.map",
-    "static/js/3.5d711914.chunk.js": "/travel_buddy/static/js/3.5d711914.chunk.js",
-    "static/js/3.5d711914.chunk.js.map": "/travel_buddy/static/js/3.5d711914.chunk.js.map",
-    "index.html": "/travel_buddy/index.html",
-    "static/css/main.9d5b29c0.chunk.css.map": "/travel_buddy/static/css/main.9d5b29c0.chunk.css.map",
-    "static/js/2.90beae1b.chunk.js.LICENSE.txt": "/travel_buddy/static/js/2.90beae1b.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/travel_buddy/static/media/logo.6ce24c58.svg"
+    "main.css": "/SW-Project/travel_buddy/static/css/main.9d5b29c0.chunk.css",
+    "main.js": "/SW-Project/travel_buddy/static/js/main.1fb155ae.chunk.js",
+    "main.js.map": "/SW-Project/travel_buddy/static/js/main.1fb155ae.chunk.js.map",
+    "runtime-main.js": "/SW-Project/travel_buddy/static/js/runtime-main.ec4788fe.js",
+    "runtime-main.js.map": "/SW-Project/travel_buddy/static/js/runtime-main.ec4788fe.js.map",
+    "static/js/2.90beae1b.chunk.js": "/SW-Project/travel_buddy/static/js/2.90beae1b.chunk.js",
+    "static/js/2.90beae1b.chunk.js.map": "/SW-Project/travel_buddy/static/js/2.90beae1b.chunk.js.map",
+    "static/js/3.5d711914.chunk.js": "/SW-Project/travel_buddy/static/js/3.5d711914.chunk.js",
+    "static/js/3.5d711914.chunk.js.map": "/SW-Project/travel_buddy/static/js/3.5d711914.chunk.js.map",
+    "index.html": "/SW-Project/travel_buddy/index.html",
+    "static/css/main.9d5b29c0.chunk.css.map": "/SW-Project/travel_buddy/static/css/main.9d5b29c0.chunk.css.map",
+    "static/js/2.90beae1b.chunk.js.LICENSE.txt": "/SW-Project/travel_buddy/static/js/2.90beae1b.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/SW-Project/travel_buddy/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.174213e6.js",
+    "static/js/runtime-main.ec4788fe.js",
     "static/js/2.90beae1b.chunk.js",
     "static/css/main.9d5b29c0.chunk.css",
     "static/js/main.1fb155ae.chunk.js"
