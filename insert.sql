@@ -27,10 +27,10 @@ Select * from Trips;
 
 -- --------------------------------- NOT DONE YET -------------------------------
 -- inserting Reservation table
-insert into `Reservation` value (1234567,1,null,0,0);
-insert into `Reservation` value (1234567,2, null,1,0);
-insert into `Reservation` value (5678,2, null, 0,1);
-insert into `Reservation` value (09876,3, null, 0,1);
+insert into `Reservation` value (1234567,1,"2020:9:30",0,0);
+insert into `Reservation` value (1234567,2, "2020:10:2",1,0);
+insert into `Reservation` value (5678,2, "2020:10:2", 0,1);
+insert into `Reservation` value (09876,3, "2020:10:20", 0,1);
 
 Select * from Reservation;
 -- inserting rates table

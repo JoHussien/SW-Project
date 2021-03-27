@@ -5,58 +5,66 @@ create database if not exists `travelling_agency`;
 use `travelling_agency`;
 
 create table if not exists company (
-comp_id BIGINT primary key,
-comp_name varchar(50),
-representative_fame varchar(15),
-representative_lname varchar(15),
-Tele_number BIGINT,
-city varchar(20), 
-country varchar(20),
+comp_id BIGINT primary key not null, 
+comp_name varchar(50) not null,
+representative_fame varchar(15) not null,
+representative_lname varchar(15) not null,
+Tele_number BIGINT not null,
+city varchar(20) not null, 
+country varchar(20) not null,
 street varchar(100), 
 address varchar(100)
 );
  create table if not exists	users (
-national_id  BIGINT primary key,
-user_fname   varchar(20),
-user_lname   varchar(20),
-mail  varchar(100),
-tele_number BIGINT,
+user_id  BIGINT primary key not null auto_increment, 
+user_fname   varchar(20) not null,
+user_lname   varchar(20) not null,
+mail  varchar(100) not null,
+tele_number BIGINT not null,
 city varchar(20), 
 country varchar(20),
-boy bool,
-BD date
+boy bool not null,
+BD date 
  );
  
  create table if not exists	Trips (
-trip_id  BIGINT primary key,
-comp_id BIGINT,
-price int,
-days int,#in days
-hours int,#in hours
+trip_id  BIGINT primary key not null auto_increment,
+comp_id BIGINT not null,
+price int not null,
+days int not null,#in days
+hours int not null,#in hours
 descri text,
-city varchar(20), 
-country varchar(20),
+city varchar(20) not null,  #dahab
+country varchar(20)not null, #egypt
 visited_place varchar(200) not null, # saint catrine mountain
   foreign key (comp_id) references company (comp_id)
  );
+  create table if not exists Trips_photos (
+  trip_id  BIGINT not null,
+  photo longblob not null,
+  photo_id BIGINT,
+  constraint Trips_photos_Pk primary key (trip_id,photo_id),
+  foreign key (trip_id) references Trips (trip_id)
+  );
+
 
   create table if not exists Reservation(
-  national_id  BIGINT, 
-  trip_id  BIGINT ,
-  D date,
-  done bool,
-  cancelled bool,
-   constraint Reservation_Pk primary key (national_id,trip_id),
-    foreign key (national_id) references users (national_id) ,
+  user_id  BIGINT not null, 
+  trip_id  BIGINT not null,
+  D date not null,
+  done bool not null,
+  cancelled bool not null,
+   constraint Reservation_Pk primary key (user_id,trip_id),
+    foreign key (user_id) references users (user_id) ,
    foreign key (trip_id) references Trips (trip_id)
   );
    create table if not exists  rates (
-     national_id  BIGINT ,
-     comp_id BIGINT,
-     stars int,
+     user_id  BIGINT not null,
+     comp_id BIGINT not null,
+     stars int not null,
      descri text,
-    constraint Reservation_Pk primary key (national_id,comp_id),
-       foreign key (national_id) references users (national_id) ,
+    constraint Reservation_Pk primary key (user_id,comp_id),
+       foreign key (user_id) references users (user_id) ,
    foreign key (comp_id) references company (comp_id)
    
    );
