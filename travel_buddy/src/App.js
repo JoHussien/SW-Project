@@ -13,15 +13,28 @@ import Axios from "axios";
 class App extends Component {
 
 state = {
-  Users:[]
+  Users:[],
+  trips:[],
+  reservations:[],
+  companys:[],
+  rates:[]
 };
-
+//getting all the data you may need
 componentDidMount() {
   Axios.get('http://localhost:8001/users').then((response) => {
     this.setState({ Users: response.data })
-   
-    console.log(this.state.Users)
-
+  })
+  Axios.get('http://localhost:8001/trips').then((response) => {
+    this.setState({ reservation: response.data })
+  })
+  Axios.get('http://localhost:8001/reservation').then((response) => {
+    this.setState({ trips: response.data })
+  })
+  Axios.get('http://localhost:8001/company').then((response) => {
+    this.setState({ companys: response.data })
+  })
+  Axios.get('http://localhost:8001/rates').then((response) => {
+    this.setState({ rates: response.data })
   })
 };
 
@@ -31,14 +44,16 @@ componentDidMount() {
     return (
     <div className="App">
       {/* call the components here */}
-      {/* <Nav/>   {/* example  to call, you can pass attributes inside the calls*/}
-      {/* <Prof/> */} 
+      <Nav/>  {/* example  to call, you can pass attributes inside the calls*/}
+    <Prof/>  
+      <div>
       {
       this.state.Users.map(user=>{
         return <h1>{user.user_fname} {user.user_lname}</h1>
       })
-      } 
-      {/* <Cards/> */}
+      } </div>
+
+      <Cards/>
 
     </div>
   );
