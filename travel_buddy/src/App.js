@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Nav from './components/navbar';
-import Prof from './components/profile';
-import Cards from './components/cards';
+// import Nav from './components/navbar';
+// import Prof from './components/profile';
+// import Cards from './components/cards';
 import './App.css';
 import Axios from "axios";
 
@@ -28,6 +28,9 @@ componentDidMount() {
   Axios.get('http://localhost:8001/rates').then((response) => {
     this.setState({ rates: response.data })
   })
+  Axios.get('http://localhost:8001/users').then((response) => {
+    this.setState({ Users: response.data })
+  })
 };
 
 
@@ -36,8 +39,8 @@ componentDidMount() {
     return (
     <div className="App">
       {/* call the components here */}
-      <Nav/>  {/* example  to call, you can pass attributes inside the calls*/}
-    <Prof/>  
+      {/* <Nav/>  {/* example  to call, you can pass attributes inside the calls*/}
+    {/* <Prof/>   */} 
       <div>
       {
       this.state.Users.map(user=>{
@@ -45,7 +48,7 @@ componentDidMount() {
       })
       } </div>
 
-      <Cards/>
+      {/* <Cards/> */}
 
     </div>
   );
