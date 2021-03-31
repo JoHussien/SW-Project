@@ -21,18 +21,10 @@ state = {
 };
 //getting all the data you may need
 componentDidMount() {
-  Axios.get('http://localhost:8001/users').then((response) => {
-    this.setState({ Users: response.data })
-  })
-  Axios.get('http://localhost:8001/trips').then((response) => {
+  Axios.get('http://localhost:8001/reservation').then((response) => {
     this.setState({ reservation: response.data })
   })
-  Axios.get('http://localhost:8001/reservation').then((response) => {
-    this.setState({ trips: response.data })
-  })
-  Axios.get('http://localhost:8001/company').then((response) => {
-    this.setState({ companys: response.data })
-  })
+
   Axios.get('http://localhost:8001/rates').then((response) => {
     this.setState({ rates: response.data })
   })
