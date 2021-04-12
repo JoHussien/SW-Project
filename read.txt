@@ -1,0 +1,13 @@
+
+
+
+Code and all diagrams is on our github repo: 
+                https://github.com/JoHussien/SW-Project
+------------------------------------------------------  
+Folder:
+diagrams -> Uml diagrams
+server folder -> nodejs(backend)
+travel_buddy -> frontedn (ReactJs)        
+------------------------------------------------------
+Demo:
+        https://youtu.be/NuncuIh09ek
