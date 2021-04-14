@@ -44,6 +44,9 @@ export default class login extends Component {
         invalidl:"",
         invalidTele:"",
         invalidcomp_name :"",
+
+        invalidcompany1:"",
+        invalidcompany2:"",
         
         
     }
@@ -159,6 +162,10 @@ export default class login extends Component {
       this.setState({ invalidpass: "is-valid" })
       else
       this.setState({ invalidpass: "is-invalid" })
+      if(this.state.company!==-1)
+      this.setState({ invalidcompany1: "is-valid" })
+      else
+      this.setState({ invalidcompany1: "is-invalid" })
 
     }
     validateSign=()=>{
@@ -193,7 +200,10 @@ export default class login extends Component {
       this.setState({ invalidTele: "is-valid" })
       else
       this.setState({ invalidTele: "is-invalid" })
-
+      if(this.state.company!==-1)
+      this.setState({ invalidcompany2: "is-valid" })
+      else
+      this.setState({ invalidcompany2: "is-invalid" })
 
     }
 
@@ -217,8 +227,8 @@ export default class login extends Component {
                             {this.state.login && <div className="login">
                                 <h1 className="title">login</h1>
                                 <form className="needs-validation">
-                                <div class="mb-3">
-                                    <select class="inputLogin form-control" required aria-label="select example" onChange={(e)=>this.props.handlecompany(e.target.value)}>
+                                <div className="mb-3">
+                                    <select className={"inputLogin "+"form-control "+this.state.invalidcompany1} required aria-label="select example" onChange={(e)=>this.props.handlecompany(e.target.value)}>
                                       <option value="">Open this select menu</option>
                                       <option value="1">Company</option>
                                       <option value="2">User</option>
@@ -241,7 +251,7 @@ export default class login extends Component {
                                   <div className="signup">
 
                                   <div class="mb-3">
-                                    <select class="inputSign form-control" required aria-label="select example" onChange={(e)=>this.handlecompany(e.target.value)}>
+                                    <select className={"inputSign "+"form-control "+this.state.invalidcompany2} required aria-label="select example" onChange={(e)=>this.handlecompany(e.target.value)}>
                                       <option value="">Open this select menu</option>
                                       <option value="1">Company</option>
                                       <option value="2">User</option>
