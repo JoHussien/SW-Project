@@ -151,7 +151,7 @@ export default class login extends Component {
         console.log({ login });
     };
 
-    validateInput=(mail, pass)=>{
+    validateInput=(mail, pass,company)=>{
 
       if(mail!=="")
       this.setState({ invalidmail: "is-valid" })
@@ -162,7 +162,7 @@ export default class login extends Component {
       this.setState({ invalidpass: "is-valid" })
       else
       this.setState({ invalidpass: "is-invalid" })
-      if(this.state.company!==-1)
+      if(company!==-1)
       this.setState({ invalidcompany1: "is-valid" })
       else
       this.setState({ invalidcompany1: "is-invalid" })
@@ -238,7 +238,7 @@ export default class login extends Component {
                                   </div>
                                     <input type="text" className={"inputLogin" +" form-control "+this.state.invalidmail} id="validationServer01" placeholder="mail" onChange={(e) => this.handleMail(e.target.value)} required/>
                                     <input type="password" className={"inputLogin" +" form-control "+this.state.invalidpass}  id="validationServer02"placeholder="password"  onChange={(e) => this.handlePass(e.target.value)} required/>
-                                    <button  className="submit" onClick={(e)=>this.props.getAccount(this.state.mail,this.state.pass,e)+this.validateInput(this.state.mail, this.state.pass)}>login </button>
+                                    <button  className="submit" onClick={(e)=>this.props.getAccount(this.state.mail,this.state.pass,e)+this.validateInput(this.state.mail, this.state.pass,this.props.company)}>login </button>
                                 </form>
                               
                             </div>}
