@@ -90,6 +90,7 @@ getAccount =(mail, pass,event)=>{
       auth={this.state.auth}
       loginflag={this.state.loginflagauth}
       handlecompany={this.handlecompany}
+      company={this.state.company}
         />}
 
     {
@@ -102,6 +103,7 @@ getAccount =(mail, pass,event)=>{
       auth={this.state.auth}
       loginflag={this.state.loginflag}
       handlecompany={this.handlecompany}
+      company={this.state.company}
       />
         </div>
         }
