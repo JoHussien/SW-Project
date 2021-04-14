@@ -29,10 +29,22 @@
    
 
   }
-  .input{
+  .inputLogin{
     margin : 10px;
     position: relative;
-    left:10px;
+    left:82px;
+    top:30px;
+    width: 200px;
+    /* height:140px; */
+ 
+   
+    text-align: center;
+  }
+
+  .inputSign{
+    margin : 10px;
+    position: relative;
+    left:100px;
     top:30px;
     width: 200px;
     /* height:140px; */

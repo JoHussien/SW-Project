@@ -16,6 +16,7 @@ class App extends Component {
 state = {
   auth:false,
   loginflag:false,
+  company:-1,
 
   User_data:[],
   trips:[],
@@ -28,48 +29,70 @@ logintoggle =()=>{
   this.setState({loginflag:true})
   console.log(this.state.loginflag)
 }
-getAccount =(mail, pass)=>{
+handlecompany = (e) => {
+ 
+  if(e==2) //user
+    this.setState({ company: 0 })
+  else
+    this.setState({ company: 1 })
 
-  Axios.get('http://localhost:8001/myaccount/'+mail).then((response) => {
-    this.setState({ User_data: response.data })
+}
+getAccount =(mail, pass,event)=>{
+  event.preventDefault();
+  let url;
+  if(this.state.company===0)
+   url="http://localhost:8001/myaccount/user/"
+  else if(this.state.company===1)
+   url="http://localhost:8001/myaccount/company/"
 
-    let passw=(response.data)[0].pass ;
-    console.log(this.state.User_data)
 
-    if(pass===passw){
-      this.setState({ auth: true})
-      this.logintoggle()
-    }
-    else {
-      alert(pass +"="+passw )
-      
-    }
-    
-  })
+  if(mail !=="" &&pass !==""){
   
+  Axios.get(url+mail).then((response) => {
+    this.setState({ User_data: response.data })
+    try{
+    let passw=(response.data)[0].pass ;
+  if(pass===passw && ((response.data)[0].pass)!=="")
+  {
+     
+      
+      console.log(this.state.User_data)
 
+ 
+        this.setState({ auth: true})
+        this.logintoggle()
+        console.log(this.state.auth)
+      
+     
+  } else {
+    alert("password wrong" )
+    
+    }
+  }catch{
+    alert("There is no such a user")
+  }
+  })
+
+
+}
 }
 
 
   render() {
 
     return (
-    <div className="App">
 
+    <div className="App">
+    {/* --------------_Login and Sign Up----------------*/}
       {!this.state.loginflag&&<Login
       logintoggle={this.logintoggle}
       getAccount={this.getAccount}
       auth={this.state.auth}
       loginflag={this.state.loginflagauth}
+      handlecompany={this.handlecompany}
         />}
-      {this.state.loginflag&&this.state.auth&&
-      <div>
-          <div>comp_name={this.state.User_data[0].comp_name} </div>
-          <div> representative_fame={this.state.User_data[0].representative_fame}</div>
-      
-        </div>
-      }
-       {
+
+    {
        this.state.loginflag&&!this.state.auth&&
       <div>
           <div>Please Login in </div>
@@ -78,11 +101,24 @@ getAccount =(mail, pass)=>{
       getAccount={this.getAccount}
       auth={this.state.auth}
       loginflag={this.state.loginflag}
+      handlecompany={this.handlecompany}
       />
         </div>
-     
+        }
+           {/* --------------_Login and Sign Up----------------*/}
 
+      {/* ------------------------------------------------------------------------------------------*/}
+
+           {/* --------------_Company Hompage ----------------*/}
+      {this.state.loginflag&&this.state.auth&&
+      <div>
+          <div>comp_name={this.state.User_data[0].comp_name} </div>
+          <div> representative_fame={this.state.User_data[0].representative_fame}</div>
+      
+        </div>
       }
+          {/* --------------_Company Hompage -------------------*/}
+      
     
 
     </div>

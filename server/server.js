@@ -70,8 +70,8 @@ app.get("/Trips_photos", (req, res) => {
 
   });
 });
-//-------------------------Getting my account by login--------------------------------
-app.get("/myaccount/:tagId", (req, res) => {
+//-------------------------Getting my account by login for company--------------------------------
+app.get("/myaccount/company/:tagId", (req, res) => {
   const sqlget = `SELECT * FROM travelling_agency.company where mail="`+ req.param("tagId") + '"'
   db.query(sqlget, (err, result) => {
       res.send(result);
@@ -79,10 +79,18 @@ app.get("/myaccount/:tagId", (req, res) => {
 
   });
 });
+//-------------------------Getting my account by login by user--------------------------------
+app.get("/myaccount/user/:tagId", (req, res) => {
+  const sqlget = `SELECT * FROM travelling_agency.users where mail="`+ req.param("tagId") + '"'
+  db.query(sqlget, (err, result) => {
+      res.send(result);
+      console.log(result)
 
-//---------------create new account--------------------//
-app.post(`/new_account`, (req, res) => {
-  const company = req.body.company;
+  });
+});
+//---------------create new account For company--------------------//
+app.post(`/new_account/company`, (req, res) => {
+  
   const mail = req.body.mail;
   const pass = req.body.pass;
   const comp_name = req.body.comp_name;
@@ -94,9 +102,8 @@ app.post(`/new_account`, (req, res) => {
   const street = req.body.street;
   const address = req.body.address;
 
-  // if(company==true){
   const insert = `insert into travelling_agency.company values (?,?,?,?,?,?,?,?,?,?);`
-  // }
+
 
   db.query(insert
       , [mail, pass, comp_name, representative_fame, representative_lname,Tele_number,city,country,street,address]
@@ -107,4 +114,33 @@ app.post(`/new_account`, (req, res) => {
       });
 
 });
+//---------------create new account For user--------------------//
+
+app.post(`/new_account/user`, (req, res) => {
+
+  const pass = req.body.pass;
+  const user_fname=req.body.user_fname;
+  const user_lname=req.body.user_lname;
+  const mail = req.body.mail;
+  const Tele_number = req.body.Tele_number;
+  const city = req.body.city;
+  const country = req.body.country;
+  const gender=req.body.gender;
+  const BD=req.body.BD;
+
+
+  const insert = `insert into travelling_agency.users values (?,?,?,?,?,?,?,?,?);`
+
+
+  db.query(insert
+      , [pass, user_fname, user_lname, mail, Tele_number,city,country,country,gender,BD]
+      , (err, result) => {
+
+          console.log(err)
+          console.log(result)
+      });
+
+});
+
+
 app.listen(8001)
