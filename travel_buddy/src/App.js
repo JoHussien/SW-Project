@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Login from './components/login';
-// import Nav from './components/navbar';
+import Hompage from './components/homepage'
+
 // import Prof from './components/profile';
 // import Cards from './components/cards';
 import './App.css';
@@ -112,15 +113,25 @@ getAccount =(mail, pass,event)=>{
       {/* ------------------------------------------------------------------------------------------*/}
 
            {/* --------------_Company Hompage ----------------*/}
-      {this.state.loginflag&&this.state.auth&&
+      {this.state.company===1&&this.state.loginflag&&this.state.auth&&
       <div>
           <div>comp_name={this.state.User_data[0].comp_name} </div>
           <div> representative_fame={this.state.User_data[0].representative_fame}</div>
       
         </div>
       }
-          {/* --------------_Company Hompage -------------------*/}
+         {/* --------------_Company Hompage -------------------*/}
+
+          {/* --------------USer Hompage -------------------*/}
+
+       {this.state.loginflag&&this.state.auth&&!this.state.company&&
+         <div>
+         <Hompage/>
       
+        </div>
+      }
+       
+     {/* --------------USer Hompage -------------------*/}
     
 
     </div>

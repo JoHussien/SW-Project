@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+/* ---------------------------------------- */
+.responsive-image {  width: 100%;  height: auto; } 
+.cards{
+  width:194px;
+  height: 250px;
+  position: sticky;
+  float: left;
+  margin:50px;
+  margin-top: 100px;
+  /* background-color: red; */
+  border-radius:10px;
+  text-align: center
+  }   
