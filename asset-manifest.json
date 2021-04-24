@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/SW-Project/static/css/main.35b79dde.chunk.css",
-    "main.js": "/SW-Project/static/js/main.c0b10825.chunk.js",
-    "main.js.map": "/SW-Project/static/js/main.c0b10825.chunk.js.map",
+    "main.css": "/SW-Project/static/css/main.ade423eb.chunk.css",
+    "main.js": "/SW-Project/static/js/main.1c9bb875.chunk.js",
+    "main.js.map": "/SW-Project/static/js/main.1c9bb875.chunk.js.map",
     "runtime-main.js": "/SW-Project/static/js/runtime-main.c40571ad.js",
     "runtime-main.js.map": "/SW-Project/static/js/runtime-main.c40571ad.js.map",
     "static/js/2.28ab27cb.chunk.js": "/SW-Project/static/js/2.28ab27cb.chunk.js",
@@ -10,15 +10,14 @@
     "static/js/3.2993dbbf.chunk.js": "/SW-Project/static/js/3.2993dbbf.chunk.js",
     "static/js/3.2993dbbf.chunk.js.map": "/SW-Project/static/js/3.2993dbbf.chunk.js.map",
     "index.html": "/SW-Project/index.html",
-    "static/css/main.35b79dde.chunk.css.map": "/SW-Project/static/css/main.35b79dde.chunk.css.map",
+    "static/css/main.ade423eb.chunk.css.map": "/SW-Project/static/css/main.ade423eb.chunk.css.map",
     "static/js/2.28ab27cb.chunk.js.LICENSE.txt": "/SW-Project/static/js/2.28ab27cb.chunk.js.LICENSE.txt",
-    "static/media/travell.16a15561.jpeg": "/SW-Project/static/media/travell.16a15561.jpeg",
-    "static/media/login.css": "/SW-Project/static/media/winning-logo.750b343c.jpg"
+    "static/media/login.css": "/SW-Project/static/media/travell.16a15561.jpeg"
   },
   "entrypoints": [
     "static/js/runtime-main.c40571ad.js",
     "static/js/2.28ab27cb.chunk.js",
-    "static/css/main.35b79dde.chunk.css",
-    "static/js/main.c0b10825.chunk.js"
+    "static/css/main.ade423eb.chunk.css",
+    "static/js/main.1c9bb875.chunk.js"
   ]
 }
