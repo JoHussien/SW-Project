@@ -28,7 +28,7 @@ export default class trips extends Component {
 
         return (
             <div>
-             {this.state.trips.slice(0, 8).map( (trip) => (
+             {this.state.trips.slice(0, 8).map((trip) => (
              
           <Trip
              city={trip.city}
@@ -38,8 +38,12 @@ export default class trips extends Component {
              desciption={trip.descri}
              visited_place={trip.visited_place}
              id={trip.trip_id}
+
+             days={trip.days}
+             hours={trip.hours}
+
              handeldisable={this.handeldisable}
-             disable={this.state.disable}
+            //  disable={this.state.disable}
              />
              
              )) } 

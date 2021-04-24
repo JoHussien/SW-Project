@@ -44,12 +44,13 @@ export default class navbar extends Component {
 
 
             </ul>
-            <div className="">
-            <form className="d-flex " >
-              <input className="form-control me-2 float-left" type="search"  placeholder="Search" aria-label="Search"/>
-              <button className="btn btn-outline-success float-left" type="submit">Search</button>
-            </form>
+           
+            <div className="d-flex">
+            <div className="text-capitalize">{this.props.user_fname} {this.props.user_lname}</div>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <div className="fas fa-user-alt fs-2"></div>
             </div>
+
           </div>
         </div>
       </nav>

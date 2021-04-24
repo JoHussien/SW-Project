@@ -79,6 +79,16 @@ app.get("/myaccount/company/:tagId", (req, res) => {
 
   });
 });
+
+//---------------------getting some data that will be used by the user-------------------------//
+app.get("/company_for_user/:tagId", (req, res) => {
+  const sqlget = `SELECT comp_name,representative_fame,representative_lname,mail,Tele_number FROM travelling_agency.company where mail="`+ req.param("tagId") + '"'
+  db.query(sqlget, (err, result) => {
+      res.send(result);
+      console.log(result)
+
+  });
+});
 //-------------------------Getting my account by login by user--------------------------------
 app.get("/myaccount/user/:tagId", (req, res) => {
   const sqlget = `SELECT * FROM travelling_agency.users where mail="`+ req.param("tagId") + '"'
