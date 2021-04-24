@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Login from './components/login';
-import Hompage from './components/homepage'
+import Hompage from './components/U_homepage'
 
 // import Prof from './components/profile';
 // import Cards from './components/cards';

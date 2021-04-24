@@ -62,8 +62,8 @@ app.get("/reservation", (req, res) => {
   });
 });
 //-----------------------Trips_photos----------------------//
-app.get("/Trips_photos", (req, res) => {
-  const sqlget = 'SELECT * FROM travelling_agency.Trips_photos;'
+app.get("/Trips_photos/:tagId", (req, res) => {
+  const sqlget = `SELECT * FROM travelling_agency.Trips_photos where trip_id=`+ req.param("tagId") 
   db.query(sqlget, (err, result) => {
       res.send(result);
       console.log(result)
@@ -133,7 +133,7 @@ app.post(`/new_account/user`, (req, res) => {
 
 
   db.query(insert
-      , [pass, user_fname, user_lname, mail, Tele_number,city,country,country,gender,BD]
+      , [pass, user_fname, user_lname, mail, Tele_number,city,country,gender,BD]
       , (err, result) => {
 
           console.log(err)

@@ -18,10 +18,10 @@ insert into `users` value (1345, "Salma","Soliman", "salma@aucegypt.edu",0122932
 
 Select * from users;
 -- inserting Trips table
-insert into `Trips` value (1,"Travelling4@localhost",1000,1,5,"", "Tagmoo3","Egypt","escape room");
-insert into `Trips` value (2,"Travelling1@localhost",1000,1,2,"", "dahab","Egypt","saint catrine mountain");
-insert into `Trips` value (3,"Travelling2@localhost",5000,1,4,"" ,"alex","Egypt","ay nela mkan");
-insert into `Trips` value (4,"Travelling2@localhost",3300,1,10,"" ,"hurdga","Egypt","nela mo5tlefa 3an el nela el fo2");
+insert into `Trips` value (1,"Travelling4@localhost",1000,1,5,"Some quick example text to build on the card title and make up the bulk of the card's content.", "Tagmoo3","Egypt","escape room");
+insert into `Trips` value (2,"Travelling1@localhost",1000,1,2,"Some quick example text to build on the card title and make up the bulk of the card's content.", "dahab","Egypt","saint catrine mountain");
+insert into `Trips` value (3,"Travelling2@localhost",5000,1,4,"Some quick example text to build on the card title and make up the bulk of the card's content." ,"alex","Egypt","ay nela mkan");
+insert into `Trips` value (4,"Travelling2@localhost",3300,1,10,"Some quick example text to build on the card title and make up the bulk of the card's content." ,"hurdga","Egypt","nela mo5tlefa 3an el nela el fo2");
 
 Select * from Trips;
 
@@ -40,3 +40,6 @@ insert into `rates` value ("salma@aucegypt.edu","Travelling2@localhost", 1, "");
 insert into `rates` value ("salma@aucegypt.edu","Travelling1@localhost", 5, "");
 
 Select * from rates;
+
+-- inserting Trip_photos
+INSERT INTO travelling_agency.Trips_photos VALUES(1,LOAD_FILE('/Users/auc/Desktop/sw/travell.jpg'),1);

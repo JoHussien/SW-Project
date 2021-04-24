@@ -28,17 +28,17 @@ export default class login extends Component {
 
         //data related to the user
         BD:"",
-        gender:"",
+        gender:-1,
 
 
         login_mail:"",
         login_pass:"",
         user_Data:[],
 
-        invalidmail:"",
+        invalidmail:"",//login
         invalidpass:"",
 
-        invalidmail2:"",
+        invalidmail2:"", //sign up
         invalidpass2:"",
         invalidf:"",
         invalidl:"",
@@ -47,6 +47,11 @@ export default class login extends Component {
 
         invalidcompany1:"",
         invalidcompany2:"",
+
+        invalid_userf:"",
+        invalid_userl:"",
+        
+
         
         
     }
@@ -60,12 +65,22 @@ export default class login extends Component {
     handlecomp_name = (e) => {
         this.setState({ comp_name: e })
       }
+
+      //company representative name
     handlerepresentative_fame = (e) => {
         this.setState({ representative_fame: e })
       }
     handlerepresentative_lname = (e) => {
         this.setState({ representative_lname: e })
       }
+ //user name
+      handle_user_lname = (e) => {
+        this.setState({ user_lname: e })
+      }
+      handle_user_fname = (e) => {
+        this.setState({ user_fname: e })
+      }
+
     handleTele_number = (e) => {
         this.setState({ Tele_number: e })
       }
@@ -89,19 +104,32 @@ export default class login extends Component {
           this.setState({ company: 1 })
      
       }
+      handlegender = (e) => {
+        let gender=-1;
+        if(e==2) //Girl
+          this.setState({ gender: 0 })
+        else
+          this.setState({ gender: 1 })
+     
+      }
+
+      //handling the date
+      handleBD = (e) => {
+        this.setState({ BD: e })
+      }
     insert = (event) => {
 
       let url;
       if(this.state.company===0)
-       url="http://localhost:8001/new_account/user/"
+       url="http://localhost:8001/new_account/user"
       else if(this.state.company===1)
        url="http://localhost:8001/new_account/company"
 
       if(this.state.mail!==""&&
         this.state.pass !==""&&
-        this.state.representative_fame!==""&&
-        this.state.representative_lname!==""&&
-        this.state.comp_name!==""&&
+        (this.state.representative_fame!==""||this.state.user_fname!=="")&&
+        (this.state.representative_lname!==""||this.state.user_lname!=="")&&
+        (this.state.comp_name!==""||this.state.company==0)&&
         this.state.Tele_number!==0&&
         this.state.company!==-1){
 
@@ -205,6 +233,16 @@ export default class login extends Component {
       else
       this.setState({ invalidcompany2: "is-invalid" })
 
+      if(this.state.user_fname!=="")
+      this.setState({ invalid_userf: "is-valid" })
+      else
+      this.setState({ invalid_userf: "is-invalid" })
+
+      if(this.state.user_lname!=="")
+      this.setState({ invalid_userl: "is-valid" })
+      else
+      this.setState({ invalid_userl: "is-invalid" })
+
     }
 
     render() {
@@ -262,15 +300,30 @@ export default class login extends Component {
                                  
                                     <input type="mail" className={"inputSign" +" form-control "+this.state.invalidmail2}  placeholder="email" onChange={(e) => this.handleMail(e.target.value)}required/>
                                     <input type="password" className={"inputSign" +" form-control "+this.state.invalidpass2} placeholder="password" onChange={(e) => this.handlePass(e.target.value)}required/>
-                                    <input type="text" className={"inputSign" +" form-control "+this.state.invalidcomp_name}  placeholder="company name" onChange={(e) => this.handlecomp_name(e.target.value)}required/>
+                                    {this.state.company==1&& <input type="text" className={"inputSign" +" form-control "+this.state.invalidcomp_name}  placeholder="company name" onChange={(e) => this.handlecomp_name(e.target.value)}required/>}
                                    {this.state.company==1&& <input type="text" className={"inputSign" +" form-control "+this.state.invalidf}  placeholder="Representative first name" onChange={(e) => this.handlerepresentative_fame(e.target.value)}required/>}
                                    {this.state.company==1&&<input type="text" className={"inputSign" +" form-control "+this.state.invalidl} placeholder="Representative last name" onChange={(e) => this.handlerepresentative_lname(e.target.value)}required/>}
+                                   {this.state.company==0&& <input type="text" className={"inputSign" +" form-control "+this.state.invalid_userf}  placeholder="user first name" onChange={(e) => this.handle_user_fname(e.target.value)}required/>}
+                                   {this.state.company==0&& <input type="text" className={"inputSign" +" form-control "+this.state.invalid_userl}  placeholder="user last name" onChange={(e) => this.handle_user_lname(e.target.value)}required/>}
                                     <input type="number" className={"inputSign" +" form-control "+this.state.invalidTele}  placeholder="Telephone num" onChange={(e) => this.handleTele_number(e.target.value)}required/>
                                     <input type="text" className={"inputSign" +" form-control "}  placeholder="city" onChange={(e) => this.handlecity(e.target.value)}/>
                                     <input type="text" className={"inputSign" +" form-control "}  placeholder="country" onChange={(e) => this.handlecountry(e.target.value)}/>
-                                    <input type="text" className={"inputSign" +" form-control "} placeholder="street" onChange={(e) => this.handlestreet(e.target.value)}/>
-                                    <input type="text" className={"inputSign" +" form-control "}  placeholder="address" onChange={(e) => this.handleaddress(e.target.value)}/>
+                                    {this.state.company==0&&<input type="text" className={"inputSign" +" form-control "} placeholder="street" onChange={(e) => this.handlestreet(e.target.value)}/>}
+                                     {this.state.company==0&&<input type="text" className={"inputSign" +" form-control "}  placeholder="address" onChange={(e) => this.handleaddress(e.target.value)}/>}
+
+                                    {this.state.company==0&& <input type="date" className={"inputSign" +" form-control "}  placeholder="BD" onChange={(e) => this.handleBD(e.target.value)}required/>}
                                    
+
+                                    {this.state.company==0&&<div class="mb-3">
+                                    <select className={"inputSign "+"form-control "} required aria-label="select example" onChange={(e)=>this.handlegender(e.target.value)}>
+                                      <option value="">Gender</option>
+                                      <option value="1">Boy</option>
+                                      <option value="2">Girl</option>
+                                   
+                                    </select>
+                                   
+                                  </div>}
+
                                     </div  >
 
                                   
@@ -278,6 +331,7 @@ export default class login extends Component {
                                            
 
                                     <button type="submit" className="submit" onClick={(e)=>this.insert(e)+this.validateSign()}>sign up </button>
+                                    
                                     
                                 </form>
                                 
