@@ -43,6 +43,20 @@ app.get("/trips", (req, res) => {
 
   });
 });
+
+app.get("/filtered_trips/:tagId/:tagId2/:tagId3/:tagId5/:tagId6/:tagId7", (req, res) => {
+  const sqlget = `SELECT *
+  FROM travelling_agency.trips as t
+  left join 
+  (SELECT avg(stars) as stars,comp_mail from travelling_agency.rates
+  group by comp_mail)as R on t.mail=R.comp_mail `+
+  `where city="`+req.param("tagId") +`"`+` or price`+req.param("tagId2")+req.param("tagId3") +` or stars=`+req.param("tagId5")+ ` or days`+req.param("tagId6")+req.param("tagId7")
+  db.query(sqlget, (err, result) => {
+      res.send(result);
+      console.log(result)
+
+  });
+});
 //-----------------------rates----------------------//
 app.get("/rates", (req, res) => {
   const sqlget = 'SELECT * FROM travelling_agency.rates;'
@@ -53,8 +67,11 @@ app.get("/rates", (req, res) => {
   });
 });
 //-----------------------reservation----------------------//
-app.get("/reservation", (req, res) => {
-  const sqlget = 'SELECT * FROM travelling_agency.reservation;'
+app.get("/reservation/:tagId", (req, res) => {
+  const sqlget = `SELECT t.trip_id, t.mail, R.mail as user_name,price,days, hours,descri,city,country,visited_place,done, cancelled
+  FROM travelling_agency.Reservation as R
+  left join travelling_agency.trips as t on t.trip_id=R.trip_id 
+  where R.mail="`+ req.param("tagId") + '"'
   db.query(sqlget, (err, result) => {
       res.send(result);
       console.log(result)
@@ -151,6 +168,32 @@ app.post(`/new_account/user`, (req, res) => {
       });
 
 });
+
+// app.post(`/new_rating`, (req, res) => {
+
+//   const pass = req.body.pass;
+//   const user_fname=req.body.user_fname;
+//   const user_lname=req.body.user_lname;
+//   const mail = req.body.mail;
+//   const Tele_number = req.body.Tele_number;
+//   const city = req.body.city;
+//   const country = req.body.country;
+//   const gender=req.body.gender;
+//   const BD=req.body.BD;
+
+
+//   const insert = `insert into travelling_agency.users values (?,?,?,?,?,?,?,?,?);`
+
+
+//   db.query(insert
+//       , [pass, user_fname, user_lname, mail, Tele_number,city,country,gender,BD]
+//       , (err, result) => {
+
+//           console.log(err)
+//           console.log(result)
+//       });
+
+// });
 
 
 app.listen(8001)

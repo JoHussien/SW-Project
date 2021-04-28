@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Login from './components/login';
 import Hompage from './components/U_homepage'
 
-// import Prof from './components/profile';
+import UProf from './components/U_Profile';
+
 // import Cards from './components/cards';
 import './App.css';
 import Axios from "axios";
@@ -18,13 +19,21 @@ state = {
   auth:false,
   loginflag:false,
   company:-1,
-
+  Upage:false,
+  
   User_data:[],
   trips:[],
   reservations:[],
   companys:[],
   rates:[]
 };
+
+userPagetoggle=()=>{
+  this.setState({Upage:true})
+}
+userHomepagetoggle=()=>{
+  this.setState({Upage:false})
+}
 
 logintoggle =()=>{
   this.setState({loginflag:true})
@@ -126,17 +135,33 @@ getAccount =(mail, pass,event)=>{
 
        {this.state.loginflag&&this.state.auth&&!this.state.company&&
          <div>
-         <Hompage
+         {!this.state.Upage&&<Hompage
          user_lname={this.state.User_data[0].user_lname}
          user_fname={this.state.User_data[0].user_fname}
-         />
+         userPagetoggle={this.userPagetoggle}
+         Upage={this.state.Upage}
+         />}
       
+        {this.state.Upage&&<UProf
+        user_lname={this.state.User_data[0].user_lname}
+        user_fname={this.state.User_data[0].user_fname}
+        user_mail={this.state.User_data[0].mail}
+        tele_number={this.state.User_data[0].tele_number}
+        city={this.state.User_data[0].city}
+        country={this.state.User_data[0].country}
+        boy={this.state.User_data[0].boy}
+        BD={this.state.User_data[0].BD}
+
+        userHomepagetoggle={this.userHomepagetoggle}
+        Upage={this.state.Upage}
+        
+        />}
         </div>
       }
        
      {/* --------------USer Hompage -------------------*/}
     
-
+     
     </div>
   );
   }

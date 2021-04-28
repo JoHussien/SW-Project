@@ -5,14 +5,11 @@ import Trip from './Trip';
 import Axios from "axios";
 export default class trips extends Component {
     state = {
-        trips: [],
+    
+    
         disable:""
     }
-    componentDidMount() {
-        Axios.get('http://localhost:8001/trips').then((response) => {
-          this.setState({ trips: response.data })
-        })
-    }
+
     handeldisable=(overlay)=>{
         if(overlay=="d-none")
             {
@@ -28,7 +25,7 @@ export default class trips extends Component {
 
         return (
             <div>
-             {this.state.trips.slice(0, 8).map((trip) => (
+             {this.props.trips.slice(0, 8).map((trip) => (
              
           <Trip
              city={trip.city}
@@ -43,6 +40,9 @@ export default class trips extends Component {
              hours={trip.hours}
 
              handeldisable={this.handeldisable}
+             Upage={this.props.Upage}
+             handelRate_appear={this.props.handelRate_appear}
+             handelCheckOut={this.props.handelCheckOut}
             //  disable={this.state.disable}
              />
              

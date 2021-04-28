@@ -89,7 +89,7 @@ handelShow=()=>{
                                 <div className="">{this.props.desciption}</div>
                             </div>
                             <div class="col-3 border-left">
-                                <a className={"btn btn-success checkoutButton shadow "} >check out</a>
+                                <a className={"btn btn-success checkoutButton shadow "}onClick={()=>this.props.handelCheckOut()} >check out</a>
                                 <br/>
                                 <br/>
                                 <br/>
@@ -115,20 +115,21 @@ handelShow=()=>{
 
 
 
-                    <div className=" cards" style={{width:"18em"}}>
+                    <div className="cards" style={{width:"18em"}}>
                          
-                        <div className="  shadow card-body">
+                        <div className="  shadow card-body" style={{width: "18rem", backgroundColor:"white"}}>
                          <img src={this.state.photo} className="card-img-top cropped1" alt="..."/>
                             <h5 className="text-capitalize card-title">{this.props.city},{this.props.country}</h5>
-                            <p className="text-capitalize card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            {!this.props.Upage&&<p className="text-capitalize card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>}
+                            {this.props.Upage&&<div className="text-capitalize  fw-light text-center fs-6"> Company Name: <span className="text-success">{this.state.company.comp_name}</span> </div>}
                             <ul className="list-group list-group-flush">
-                            <li className="text-capitalize list-group-item ">Price:{this.props.price}</li>
+                            {!this.props.Upage&&<li className="text-capitalize list-group-item ">Price:{this.props.price}</li>}
                             <li className="text-capitalize list-group-item ">Date:</li>
 
                             </ul>
                         
                             <a className={"btn btn-primary "+this.props.disable} onClick={()=>this.props.handeldisable(this.state.overlay)+this.handelShow()}>View Trip</a>
-                           
+                            {this.props.Upage&&<a class="btn btn-primary m-3" onClick={()=>this.props.handelRate_appear()}>Rate Trip</a>}
                         </div>
                         
                     </div>
