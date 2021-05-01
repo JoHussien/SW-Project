@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Nav from './navbar';
-import Im from './travel.jpg'
+// import Im from './travel.jpg'
+import Im from './travelll.jpg'
 import Trips from './trips';
 import Footer from './footer';
 import Pay from './payment';
@@ -200,10 +201,12 @@ export default class userhomepage extends Component {
                     user_fname={this.props.user_fname}
                     userPagetoggle={this.props.userPagetoggle}
                     />
-                  {!this.state.pay&&<div>
+                  {!this.state.pay&&
+                  <div  >
                     <img src={Im} alt="Travel made easy" class ="responsive-image" ></img>
-                    <div class="shadow-lg p-3  bg-body rounded text-center"> Let's Take you all over Egypt!</div>
 
+                    <div className="AllOverEgypt "> Let's Take you all over Egypt!</div>
+                    {/* <div className="AllOverEgypt "> Let's Take you all over Egypt!</div> */}
                    
 
                     <div className="shadow bg-body bg-lighter">

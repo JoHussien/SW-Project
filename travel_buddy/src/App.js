@@ -134,8 +134,9 @@ getAccount =(mail, pass,event)=>{
           {/* --------------USer Hompage -------------------*/}
 
        {this.state.loginflag&&this.state.auth&&!this.state.company&&
-         <div>
+         <div >
          {!this.state.Upage&&<Hompage
+
          user_lname={this.state.User_data[0].user_lname}
          user_fname={this.state.User_data[0].user_fname}
          user_mail={this.state.User_data[0].mail}

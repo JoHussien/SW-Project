@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from "axios";
-import Im from './travell.jpeg'
+import Im from './cover.jpg'
 import Nav from './navbar';
 import Trips from './trips';
 import Footer from './footer';
@@ -99,41 +99,44 @@ export default class customer extends Component {
                     userHomepagetoggle={this.props.userHomepagetoggle}
                     />
 
-                   <div className = "cover"></div>
+                   <img src={Im} className = "cover"/>
                     <div className="profile_pic">
+
                     <div className="blackpr fas fa-user-alt"></div>
                     </div>
 
-                    <div className = "rectangle"> </div>
+                    <div className = "rectangle"> 
+                    
+                    </div>
                     <div className ="name shadow"> {this.props.user_fname} {this.props.user_lname} </div>
                     <div className = "rectangle"> </div>
                     <div className = "rectangle"> </div>
 {/* -------------------------------------informaton ------------------------------------- */}
                     <div className="container"> 
-                    <div className = "container_2_info shadow m-5"> 
-                    <div className= "text-capitalize  text-start fs-1 text-margin mt-5 ml-5"> Information</div> 
+                    <div className = "container_2_info   shadow m-5 bg-dark rounded"> 
+                    <div className= "text-capitalize  text-start fs-1 text-margin mt-5 ml-5 text-light"> Information</div> 
                         <div className="row">
                             <div className="col">
                                 
-                                <div className="text-capitalize fs-5  text-start m-3" >First Name: <span className="text-info fw-light">{this.props.user_fname}</span></div>
-                                <div className="text-capitalize fs-5  text-start m-3">Last Name: <span className="text-info fw-light">{this.props.user_lname}</span></div>
-                                <div className="text-capitalize fs-5  text-start m-3">Mail:<span className="text-info fw-light">{this.props.user_mail}</span> </div>
-                                <div className="text-capitalize fs-5  text-start m-3">Telephone number:<span className="text-info fw-light">{this.props.tele_number}</span> </div>
+                                <div className="text-capitalize fs-5  text-start m-3 ml-5  text-light" >First Name: <span className="text-info fw-light">{this.props.user_fname}</span></div>
+                                <div className="text-capitalize fs-5  text-start m-3 ml-5  text-light">Last Name: <span className="text-info fw-light">{this.props.user_lname}</span></div>
+                                <div className="text-capitalize fs-5  text-start m-3 ml-5  text-light">Mail:<span className="text-info fw-light">{this.props.user_mail}</span> </div>
+                                <div className="text-capitalize fs-5  text-start m-3 ml-5  text-light">Telephone number:<span className="text-info fw-light">{this.props.tele_number}</span> </div>
                             </div>
                             <div className="col">
                                 
                                
-                                <div className="text-capitalize fs-5  text-start m-3">country: <span className="text-info fw-light">{this.props.country}</span></div>
-                                <div className="text-capitalize fs-5  text-start m-3">city: <span className="text-info fw-light">{this.props.city}</span></div>
-                                <div className="text-capitalize fs-5  text-start m-3">BD: <span className="text-info fw-light">{this.props.BD}</span></div>
+                                <div className="text-capitalize fs-5  text-start m-3 ml-5  text-light">country: <span className="text-info fw-light">{this.props.country}</span></div>
+                                <div className="text-capitalize fs-5  text-start m-3 ml-5  text-light">city: <span className="text-info fw-light">{this.props.city}</span></div>
+                                <div className="text-capitalize fs-5  text-start m-3 ml-5  text-light">BD: <span className="text-info fw-light">{this.props.BD}</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
  {/* -------------------------------------informaton ------------------------------------- */}
                     <div className="container ">
-                        <div className = "container_2 shadow m-5"> 
-                            <div className= "text-capitalize  text-start fs-1 text-margin ml-5 mt-5"> My Trips</div> 
+                        <div className = "container_2   shadow m-5 bg-dark  rounded"> 
+                            <div className= "text-capitalize  text-start fs-1 text-margin ml-5 mt-5 text-light"> My Trips</div> 
 
 
                     <div className="pl-5 ml-5">       
