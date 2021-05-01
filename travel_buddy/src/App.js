@@ -138,6 +138,7 @@ getAccount =(mail, pass,event)=>{
          {!this.state.Upage&&<Hompage
          user_lname={this.state.User_data[0].user_lname}
          user_fname={this.state.User_data[0].user_fname}
+         user_mail={this.state.User_data[0].mail}
          userPagetoggle={this.userPagetoggle}
          Upage={this.state.Upage}
          />}

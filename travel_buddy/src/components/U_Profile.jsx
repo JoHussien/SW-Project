@@ -10,7 +10,12 @@ export default class customer extends Component {
         trips:[],
         appear: false,
         rateAppear:"d-none",
-        tripBackgroud:"d-none"
+        tripBackgroud:"d-none",
+        stars:0,
+        desciption:"",
+        ratedAlready:0,
+        comp_mail:"",
+
 
     }
 
@@ -27,18 +32,62 @@ export default class customer extends Component {
           
         })
     }
-    handelRate_appear=()=>{
-        if(this.state.rateAppear=="d-none")
-            {
-                this.setState({rateAppear:"overlay"})
-                this.setState({tripBackgroud:"Tripbackgroud"})
+    handelRate_appear=(user_rates,mail)=>{
+            
+            if(this.state.rateAppear=="d-none")
+                {
+                    this.setState({rateAppear:"overlay"})
+                    this.setState({tripBackgroud:"Tripbackgroud"})
+                }
+            else
+                {
+                    this.setState({rateAppear:"d-none"})
+                    this.setState({tripBackgroud:"d-none"})
+                }
+            try{
+            if(user_rates.user_mail!==null){
+                //user is already rated
+                this.setState({ratedAlready:1})
+                this.setState({stars:user_rates.stars})
+                this.setState({desciption:user_rates.descri})
+                this.setState({comp_mail:mail})
+                
+               
+            
             }
-        else
-            {
-                this.setState({rateAppear:"d-none"})
-                this.setState({tripBackgroud:"d-none"})
-            }
+        }catch{
+            //still need a rating
+            this.setState({ratedAlready:0})
+            this.setState({comp_mail:mail})
+           
+                
         }
+            }
+    handelrating=(e)=>{
+            this.setState({stars:e})
+            // console.log(e)
+        }
+    handelDescription=(e)=>{
+            this.setState({desciption:e})
+            
+        }
+
+    InsertRate=()=>{
+        let url="http://localhost:8001/new_rating"
+        Axios.post(url,
+            {
+                desciption :this.state.desciption,
+                stars :this.state.stars,
+                user_mail:this.props.user_mail,
+                comp_name:this.state.comp_mail
+              
+            }).then(() => {
+              
+            })
+           alert("Rate is inserted, Thank you")
+            this.handelRate_appear()
+            this.setState({ratedAlready:1})
+    }
 
     render() {
 
@@ -84,7 +133,7 @@ export default class customer extends Component {
  {/* -------------------------------------informaton ------------------------------------- */}
                     <div className="container ">
                         <div className = "container_2 shadow m-5"> 
-                            <div className= "text-capitalize  text-start fs-1 text-margin m-5"> My Trips</div> 
+                            <div className= "text-capitalize  text-start fs-1 text-margin ml-5 mt-5"> My Trips</div> 
 
 
                     <div className="pl-5 ml-5">       
@@ -94,6 +143,8 @@ export default class customer extends Component {
                     handelRate_appear={this.handelRate_appear}
                     trips={this.state.trips}
                     
+
+                    
                     />
                     </div>
   
@@ -102,30 +153,57 @@ export default class customer extends Component {
 
 </div>
 <div className={this.state.tripBackgroud}></div>
-    <div className="container ">
-<div className={ "shadow "+this.state.rateAppear}>
-        
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Open to choose your rate</option>
-            <option value="1 Star">One Star</option>
-            <option value="2 Stars">Two Stars</option>
-            <option value="3 Stars">Three Stars</option>
-            <option value="4 Stars">Four Stars</option>
-            <option value="5 Stars">Five Stars</option>
-        </select>
 
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Please describe your trip</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <input class="btn btn-primary" type="submit" value="Submit"/>
-        <a className={"btn btn-primary cancelButton "} onClick={()=>this.handelRate_appear()}>cancel</a>
+    <div className="container ">
+        {!this.state.ratedAlready&&
+        <div className={ "shadow "+this.state.rateAppear}>
+        
+                                        <div className="text-center">
+                                            <div className="fs-1 text-center text-primary">Rate the Trip</div>
+                                            {this.state.stars >= 1 ? <span className="fa fa-star checked fs-1" style={{cursor:"pointer"}}onClick={(e)=>this.handelrating(e.target.innerText)}> <span className="text-light opacityzero">1</span></span> : <span className="fa fa-star unchecked fs-1" style={{cursor:"pointer"}} onClick={(e)=>this.handelrating(e.target.innerText)}> <span className="text-light opacityzero">1</span></span>}
+                                            {this.state.stars >= 2 ? <span className="fa fa-star checked fs-1" style={{cursor:"pointer"}}onClick={(e)=>this.handelrating(e.target.innerText)}><span className="text-light opacityzero">2</span></span> : <span className="fa fa-star unchecked fs-1" style={{cursor:"pointer"}} onClick={(e)=>this.handelrating(e.target.innerText)}><span className="text-light opacityzero">2</span></span>}
+                                            {this.state.stars >= 3 ? <span className="fa fa-star checked fs-1" style={{cursor:"pointer"}}onClick={(e)=>this.handelrating(e.target.innerText)}><span className="text-light opacityzero">3</span></span> : <span className="fa fa-star unchecked fs-1" style={{cursor:"pointer"}}onClick={(e)=>this.handelrating(e.target.innerText)}><span className="text-light opacityzero">3</span></span>}
+                                            {this.state.stars >= 4 ? <span className="fa fa-star checked fs-1" style={{cursor:"pointer"}}onClick={(e)=>this.handelrating(e.target.innerText)}><span className="text-light opacityzero">4</span></span> : <span className="fa fa-star unchecked fs-1" style={{cursor:"pointer"}}onClick={(e)=>this.handelrating(e.target.innerText)}><span className="text-light opacityzero">4</span></span>}
+                                            {this.state.stars >= 5 ? <span className="fa fa-star checked fs-1" style={{cursor:"pointer"}}onClick={(e)=>this.handelrating(e.target.innerText)}><span className="text-light opacityzero">5</span></span> : <span className="fa fa-star unchecked fs-1" style={{cursor:"pointer"}}onClick={(e)=>this.handelrating(e.target.innerText)}><span className="text-light opacityzero">5</span></span>}
+                                        </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Please describe your trip</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" onClick={(e)=>this.handelDescription(e.target.value)}></textarea>
+            </div>
+            <a className={"btn btn-primary cancelButton "} onClick={()=>this.handelRate_appear()}>Cancel</a>
+            <a className="btn btn-primary cancelButton" onClick={()=>this.InsertRate()}>Submit</a>
+        
     
+        </div>}
+
+        {this.state.ratedAlready===1&&
+        <div className={ "shadow "+this.state.rateAppear}>
+                                        <div className="text-capitalize text-center bg-success">You rated this already</div>
+                                        <div className="text-center">
+                                            <div className="fs-1 text-center text-primary">Rate the Trip</div>
+                                            {this.state.stars >= 1 ? <span className="fa fa-star checked fs-1" > <span className="text-light opacityzero">1</span></span> : <span className="fa fa-star unchecked fs-1" > <span className="text-light opacityzero">1</span></span>}
+                                            {this.state.stars >= 2 ? <span className="fa fa-star checked fs-1" ><span className="text-light opacityzero">2</span></span> : <span className="fa fa-star unchecked fs-1" ><span className="text-light opacityzero">2</span></span>}
+                                            {this.state.stars >= 3 ? <span className="fa fa-star checked fs-1" ><span className="text-light opacityzero">3</span></span> : <span className="fa fa-star unchecked fs-1" ><span className="text-light opacityzero">3</span></span>}
+                                            {this.state.stars >= 4 ? <span className="fa fa-star checked fs-1" ><span className="text-light opacityzero">4</span></span> : <span className="fa fa-star unchecked fs-1" ><span className="text-light opacityzero">4</span></span>}
+                                            {this.state.stars >= 5 ? <span className="fa fa-star checked fs-1" ><span className="text-light opacityzero">5</span></span> : <span className="fa fa-star unchecked fs-1" ><span className="text-light opacityzero">5</span></span>}
+                                        </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                <div>{this.state.desciption}</div>
+
+            </div>
+            <a className={"btn btn-primary cancelButton "} onClick={()=>this.handelRate_appear()}>Cancel</a>
+            
+        
+    
+        </div>}
+
     </div>
-    </div>
-    <Footer/>
+    <Footer/> 
                
-            </div >
+    </div >
         )
     }
 

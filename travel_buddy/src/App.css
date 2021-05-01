@@ -77,7 +77,7 @@
 .cancelButton{
   position: relative;
   float:right;
-  top:100px;
+  top:77px;
   margin:10px;
   
 }
@@ -179,6 +179,13 @@ background-color: gray;
   /* text-align: center; */
   /* margin-top: 30px; */
 }
-
-
+.checked {
+  color: orange;
+}
+.unchecked {
+  /* color:black; */
+}
+.opacityzero{
+  opacity: 0;
+}
 

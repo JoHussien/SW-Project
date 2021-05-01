@@ -48,7 +48,7 @@ app.get("/filtered_trips/:tagId/:tagId2/:tagId3/:tagId5/:tagId6/:tagId7", (req, 
   const sqlget = `SELECT *
   FROM travelling_agency.trips as t
   left join 
-  (SELECT avg(stars) as stars,comp_mail from travelling_agency.rates
+  (SELECT FLOOR(avg(stars)) as stars,comp_mail from travelling_agency.rates
   group by comp_mail)as R on t.mail=R.comp_mail `+
   `where city="`+req.param("tagId") +`"`+` or price`+req.param("tagId2")+req.param("tagId3") +` or stars=`+req.param("tagId5")+ ` or days`+req.param("tagId6")+req.param("tagId7")
   db.query(sqlget, (err, result) => {
@@ -58,20 +58,43 @@ app.get("/filtered_trips/:tagId/:tagId2/:tagId3/:tagId5/:tagId6/:tagId7", (req, 
   });
 });
 //-----------------------rates----------------------//
-app.get("/rates", (req, res) => {
-  const sqlget = 'SELECT * FROM travelling_agency.rates;'
+app.get("/company/rates/:tagId", (req, res) => {
+  const sqlget = `SELECT Floor(avg(stars)) as stars from travelling_agency.rates
+  where comp_mail="`+req.param("tagId") +`"`
   db.query(sqlget, (err, result) => {
       res.send(result);
       console.log(result)
 
   });
 });
-//-----------------------reservation----------------------//
+
+app.get("/user_to_comp/rates/:tagId/:tagId2", (req, res) => {
+  const sqlget = `SELECT * FROM travelling_agency.rates
+  where user_mail="`+req.param("tagId") +`"and comp_mail="`+req.param("tagId2")+`"`
+  db.query(sqlget, (err, result) => {
+      res.send(result);
+      console.log(result)
+
+  });
+});
+//-----------------------reservation of a specific user----------------------//
 app.get("/reservation/:tagId", (req, res) => {
   const sqlget = `SELECT t.trip_id, t.mail, R.mail as user_name,price,days, hours,descri,city,country,visited_place,done, cancelled
   FROM travelling_agency.Reservation as R
   left join travelling_agency.trips as t on t.trip_id=R.trip_id 
   where R.mail="`+ req.param("tagId") + '"'
+  db.query(sqlget, (err, result) => {
+      res.send(result);
+      console.log(result)
+
+  });
+});
+
+
+//-----------------------reservation of a specific user for specific trip----------------------//
+app.get("/reservation/:tagId/:tagId2", (req, res) => {
+  const sqlget = `SELECT * FROM travelling_agency.Reservation
+  where trip_id=`+req.param("tagId")+` and mail="`+ req.param("tagId2") + '"'
   db.query(sqlget, (err, result) => {
       res.send(result);
       console.log(result)
@@ -169,31 +192,49 @@ app.post(`/new_account/user`, (req, res) => {
 
 });
 
-// app.post(`/new_rating`, (req, res) => {
+//_________________________New rating___________________//
+app.post(`/new_rating`, (req, res) => {
 
-//   const pass = req.body.pass;
-//   const user_fname=req.body.user_fname;
-//   const user_lname=req.body.user_lname;
-//   const mail = req.body.mail;
-//   const Tele_number = req.body.Tele_number;
-//   const city = req.body.city;
-//   const country = req.body.country;
-//   const gender=req.body.gender;
-//   const BD=req.body.BD;
+  const desciption = req.body.desciption;
+  const stars=req.body.stars;
+  const user_mail=req.body.user_mail;
+  const comp_name = req.body.comp_name;
 
 
-//   const insert = `insert into travelling_agency.users values (?,?,?,?,?,?,?,?,?);`
+
+  const insert = `insert into travelling_agency.rates values (?,?,?,?);`
 
 
-//   db.query(insert
-//       , [pass, user_fname, user_lname, mail, Tele_number,city,country,gender,BD]
-//       , (err, result) => {
+  db.query(insert
+      , [user_mail, comp_name, stars, desciption]
+      , (err, result) => {
 
-//           console.log(err)
-//           console.log(result)
-//       });
+          console.log(err)
+          console.log(result)
+      });
 
-// });
+});
+//_________________________New reservation___________________//
+app.post(`/new_reservation`, (req, res) => {
 
+  const user_mail = req.body.user_mail;
+  const trip_id=req.body.trip_id;
+  const date=req.body.date;
+  const cancelled = req.body.cancelled;
+  const done = req.body.done;
+
+
+  const insert = `insert into travelling_agency.Reservation values (?,?,?,?,?);`
+
+
+  db.query(insert
+      , [user_mail, trip_id, date, done,cancelled]
+      , (err, result) => {
+
+          console.log(err)
+          console.log(result)
+      });
+
+});
 
 app.listen(8001)

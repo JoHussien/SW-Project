@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Im from './travell.jpeg'
+
 
 
 import Axios from "axios";
@@ -10,6 +10,9 @@ export default class trips extends Component {
         overlay:"d-none",
         tripBackgroud:"d-none",
         company:[],
+        stars:0,
+        user_rates:[],
+        reserved:false,
        
 
     }
@@ -33,8 +36,31 @@ export default class trips extends Component {
 
         Axios.get('http://localhost:8001/company_for_user/'+this.props.comp_mail).then((response) => {
           this.setState({ company: response.data[0] })
-          console.log(this.state.company.comp_name)
+        //   console.log(this.state.company.comp_name)
         })
+        Axios.get('http://localhost:8001/company/rates/'+this.props.comp_mail).then((response) => {
+            this.setState({ stars: response.data[0].stars })
+            // console.log("Stars"+this.state.stars)
+          })
+
+          Axios.get('http://localhost:8001/user_to_comp/rates/'+this.props.user_mail+"/"+this.props.comp_mail).then((response) => {
+            this.setState({ user_rates: response.data[0] })
+            // console.log(this.props.user_mail)
+          })
+
+          Axios.get('http://localhost:8001/reservation/'+this.props.id+"/"+this.props.user_mail).then((response) => {
+            try{
+          if(response.data[0].mail)
+            this.setState({ reserved: true })
+            // console.log(this.state.reserved)
+        }
+         catch{
+            this.setState({ reserved: false })
+            // console.log(this.state.reserved)
+         }
+           
+          })
+
     }
 handelShow=()=>{
     if(this.state.overlay=="d-none")
@@ -48,7 +74,7 @@ handelShow=()=>{
             this.setState({tripBackgroud:"d-none"})
         }
 
-    console.log(this.state.overlay)
+    // console.log(this.state.overlay)
 }
     render() {
 
@@ -89,7 +115,7 @@ handelShow=()=>{
                                 <div className="">{this.props.desciption}</div>
                             </div>
                             <div class="col-3 border-left">
-                                <a className={"btn btn-success checkoutButton shadow "}onClick={()=>this.props.handelCheckOut()} >check out</a>
+                                {!this.props.Upage&&<a className={"btn btn-success checkoutButton shadow "}onClick={()=>this.props.handelCheckOut(this.state.reserved,this.props.id)} >check out</a>}
                                 <br/>
                                 <br/>
                                 <br/>
@@ -100,7 +126,17 @@ handelShow=()=>{
                                 <div className="border-bottom"></div>
                                 <br/>
                                 <div className="text-capitalize font-size-sm fw-light text-start fs-6"> Company Name: <span className="text-success">{this.state.company.comp_name}</span> </div>
+                                <div className="text-start">
+                                            <span>Star Rating</span>:
+                                            {this.state.stars >= 1 ? <span class="fa fa-star checked"></span> : <span class="fa fa-star unchecked"></span>}
+                                            {this.state.stars >= 2 ? <span class="fa fa-star checked"></span> : <span class="fa fa-star unchecked"></span>}
+                                            {this.state.stars >= 3 ? <span class="fa fa-star checked"></span> : <span class="fa fa-star unchecked"></span>}
+                                            {this.state.stars >= 4 ? <span class="fa fa-star checked"></span> : <span class="fa fa-star unchecked"></span>}
+                                            {this.state.stars >= 5 ? <span class="fa fa-star checked"></span> : <span class="fa fa-star unchecked"></span>}
+                                </div>
+                                        <div className="border-bottom"></div>
                                 <br/>
+
                                 <div className="text-capitalize font-size-sm fw-light text-start fs-6"> Representative name:<span className="text-success">{this.state.company.representative_fame} {this.state.company.representative_lname} </span></div>
                                 <br/>
                                 <div className="text-capitalize font-size-sm fw-light text-start fs-6"> TelePhone:<span className="text-success">{this.state.company.Tele_number} </span></div>
@@ -117,7 +153,7 @@ handelShow=()=>{
 
                     <div className="cards" style={{width:"18em"}}>
                          
-                        <div className="  shadow card-body" style={{width: "18rem", backgroundColor:"white"}}>
+                        <div className="  shadow card-body" style={{width: "18rem", backgroundColor:"white",cursor:"pointer"}} >
                          <img src={this.state.photo} className="card-img-top cropped1" alt="..."/>
                             <h5 className="text-capitalize card-title">{this.props.city},{this.props.country}</h5>
                             {!this.props.Upage&&<p className="text-capitalize card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>}
@@ -129,7 +165,7 @@ handelShow=()=>{
                             </ul>
                         
                             <a className={"btn btn-primary "+this.props.disable} onClick={()=>this.props.handeldisable(this.state.overlay)+this.handelShow()}>View Trip</a>
-                            {this.props.Upage&&<a class="btn btn-primary m-3" onClick={()=>this.props.handelRate_appear()}>Rate Trip</a>}
+                            {this.props.Upage&&<a class="btn btn-primary m-3" onClick={()=>this.props.handelRate_appear(this.state.user_rates,this.props.comp_mail)}>Rate Trip</a>}
                         </div>
                         
                     </div>

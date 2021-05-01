@@ -32,6 +32,7 @@ export default class trips extends Component {
              country={trip.country}
              price={trip.price}
              comp_mail={trip.mail}
+             user_mail={this.props.user_mail}
              desciption={trip.descri}
              visited_place={trip.visited_place}
              id={trip.trip_id}

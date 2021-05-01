@@ -1,7 +1,102 @@
 import React, { Component } from "react";
-// import "../mystyle.css";
+import Axios from "axios";
 export default class payment extends Component {
+
+
+  state={
+    card_owner:"",
+    owner_valid:"",
+
+    card_number:0,
+    number_valid:"",
+
+    cvv:0,
+    cvv_validate:"",
+
+    month:0,
+    month_validate:"",
+
+    year:0,
+    year_validate:"",
+  }
+handelcard_owner=(e)=>{
+this.setState({card_owner:e})
+}
+handelcard_number=(e)=>{
+  this.setState({card_number:e})
+}
+handelcvv=(e)=>{
+  this.setState({cvv:e})
+}
+handelmonth=(e)=>{
+  this.setState({month:e})
+}
+handelyear=(e)=>{
+  this.setState({year:e})
+}
+  handelValidate=(event)=>{
+    if(this.state.card_owner!=="")
+    this.setState({ owner_valid: "is-valid" })
+    else
+    this.setState({ owner_valid: "is-invalid" })
+
+
+
+    if(this.state.card_number!==0)
+    this.setState({ number_valid: "is-valid" })
+    else
+    this.setState({ number_valid: "is-invalid" })
+
+
+    if(this.state.cvv!==0)
+    this.setState({ cvv_validate: "is-valid" })
+    else
+    this.setState({ cvv_validate: "is-invalid" })
+
+    if(this.state.month!==0)
+    this.setState({ month_validate: "is-valid" })
+    else
+    this.setState({ month_validate: "is-invalid" })
+
+    if(this.state.year!==0)
+    this.setState({ year_validate: "is-valid" })
+    else
+    this.setState({ year_validate: "is-invalid" })
+
+    event.preventDefault();
+  }
+
+  insertReservation = () => {
+
+    let url;
+    url="http://localhost:8001/new_reservation"
+
+    if(this.state.card_owner!==""&&
+      this.state.card_number !==0&&
+      this.state.cvv!==0&&
+      this.state.month!==0&&
+      this.state.year!==0){
+
+      Axios.post(url,
+        {
+           user_mail :this.props.user_mail,
+           trip_id :this.props.trip_id,
+           date :this.props.date,
+           cancelled :0,
+           done :0,
+          
+        }).then(() => {
+         
+        })
+       
+
+      }
+      alert("payment completed")
+      
+    }
   render() {
+
+
     return (
       <div className="container py-5">
         <div className="row mb-4">
@@ -61,7 +156,7 @@ export default class payment extends Component {
                     <form role="form" onsubmit="event.preventDefault()">
                       <div className="form-group">
                         {" "}
-                        <label for="username">
+                        <label htmlFor="username">
                           <h6>Card Owner</h6>
                         </label>{" "}
                         <input
@@ -69,12 +164,14 @@ export default class payment extends Component {
                           name="username"
                           placeholder="Card Owner Name"
                           required
-                          className="form-control "
+                          className={"form-control "+this.state.owner_valid}
+                          onChange={(e)=>this.handelcard_owner(e.target.value)}
+                        
                         />{" "}
                       </div>
                       <div className="form-group">
                         {" "}
-                        <label for="cardNumber">
+                        <label htmlFor="cardNumber">
                           <h6>Card number</h6>
                         </label>
                         <div className="input-group">
@@ -83,8 +180,9 @@ export default class payment extends Component {
                             type="text"
                             name="cardNumber"
                             placeholder="Valid card number"
-                            className="form-control "
+                            className={"form-control "+this.state.number_valid}
                             required
+                            onChange={(e)=>this.handelcard_number(e.target.value)}
                           />
                           <div className="input-group-append">
                             {" "}
@@ -110,15 +208,17 @@ export default class payment extends Component {
                                 type="number"
                                 placeholder="MM"
                                 name=""
-                                className="form-control"
+                                className={"form-control "+this.state.month_validate}
                                 required
+                                onChange={(e)=>this.handelmonth(e.target.value)}
                               />
                               <input
                                 type="number"
                                 placeholder="YY"
                                 name=""
-                                className="form-control"
+                                className={"form-control " +this.state.year_validate}
                                 required
+                                onChange={(e)=>this.handelyear(e.target.value)}
                               />
                             </div>
                           </div>
@@ -138,7 +238,8 @@ export default class payment extends Component {
                             <input
                               type="password"
                               required
-                              className="form-control"
+                              className={"form-control "+this.state.cvv_validate}
+                              onChange={(e)=>this.handelcvv(e.target.value)}
                             />
                           </div>
                         </div>
@@ -146,11 +247,11 @@ export default class payment extends Component {
                       <div className="card-footer">
                         {" "}
                         <button
-                          type="button"
+                          type="submit"
                           className="subscribe btn btn-primary btn-block shadow-sm"
+                          onClick={(e)=>this.handelValidate(e)+this.insertReservation()+this.props.hidePay()}
                         >
-                          {" "}
-                          Confirm Payment{" "}
+                          Confirm Payment
                         </button>
                       </div>
                     </form>
@@ -192,7 +293,7 @@ export default class payment extends Component {
                 <div id="net-banking" className="tab-pane fade pt-3">
                   <div className="form-group ">
                     {" "}
-                    <label for="Select Your Bank">
+                    <label htmlFor="Select Your Bank">
                       <h6>Select your Bank</h6>
                     </label>{" "}
                     <select className="form-control" id="ccmonth">
